@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://getbootstrap.com/docs/4.3/examples/starter-template/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <title>Hymn Viewer 0.7</title>
+
+
+
+    <!-- Bootstrap core CSS -->
+<link href="assets/css/bootstrap.min.css" rel="stylesheet" >
+
+
+    <style>
+					body{
+						font-family: CMG Sans;
+						font-weight: bold;
+						padding-top: 15px;
+						margin-left:25px;
+					}
+					
+						#hymnbox {
+							width:1080px;
+							height:720px;
+							border:0px solid #999;
+							overflow: hidden;
+							white-space: nowrap;
+							font-size: 72px;
+							margin:auto;
+							margin-top:0px;
+						}
+						#hymntext {
+							display: inline-block;
+						}
+						.hymncontainer{
+							width:1280px;
+							height:720px;
+							border:1px solid #999;
+							padding:auto;
+							background-color: #295ba0;
+							color:#eee;
+						}
+						#hymnbox:fullscreen {
+						    background-color: rgba(41,91,160,1);
+								padding-left: 100px;
+						}
+						#hymnbox:-webkit-full-screen {
+						    background-color: rgba(41,91,160,1);
+								padding-left: 100px;
+						}
+						#hymnbox:-moz-full-screen {
+						    background-color: rgba(41,91,160,1);
+								padding-left: 100px;
+						}
+    </style>
+    <!-- Custom styles for this template -->
+
+
+  </head>
+  <body>
+
+<div class="container" style="max-width:1310px;">	
+	<form>
+	<div class="form-group row text-center">
+						<button id="hsubtract" type="button" class="btn btn-success">-</button>
+		<div class="col-2">
+			
+			<div class="input-group">
+
+				<div class="input-group-prepend">
+					<div class="input-group-text">
+						Hymn #
+					</div>
+				</div><input id="number" name="number"  class="form-control" value="1" oninput="refreshScreen();" onkeydown="refreshScreen();">
+				
+			</div>
+
+		</div>
+							<button id="hadd" type="button" class="btn btn-success">+</button>
+<div class="col-1"></div>
+
+		<button id="vsubtract" type="button" class="btn btn-primary">-</button>
+		<div class="col-2 align-right float-right">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<div class="input-group-text">
+						Verse #
+					</div>
+				</div><input id="verse" name="verse" type="number" class="form-control" value="1" oninput="refreshScreen();" onkeydown="refreshScreen();">
+			</div>
+		</div><button id="vadd" type="button" class="btn btn-primary">+</button>
+
+	</div>
+
+</form>
+
+  <div class="hymncontainer align-middle" >
+  <div class="d-flex" id="hymnbox" >
+			<div class="align-self-center" id="hymntext"></div>
+  </div> 
+	</div>
+		<button onclick="goFullScreen();">Go Fullscreen</button>
+</div><!-- /.container -->
+<script src="assets/js/jquery-3.4.1.min.js" ></script>
+<script src="assets/js/jquery.fittext.js"></script>
+<script>
+  //jQuery("#hymnbox").fitText(2);
+</script>
+			<script>
+			$(document).ready(function(){
+			 
+			});
+			
+			
+			function goFullScreen(){
+			    var canvas = document.getElementById("hymnbox");
+			    if(canvas.requestFullScreen) 
+			        canvas.requestFullScreen();
+			    else if(canvas.webkitRequestFullScreen)
+			        canvas.webkitRequestFullScreen();
+			    else if(canvas.mozRequestFullScreen)
+			        canvas.mozRequestFullScreen();
+					
+					refreshScreen();
+			}
+			</script>
+			<script>
+				var $hymns;
+			 
+				
+				// Get and parse the JSON file
+				function getHymnsJSON(url){
+					$.getJSON({
+						url: url,
+						dataType: "json",
+						mimeType: "application/json",
+						success: function($json){
+							$hymns = $json['hymns'];
+						}
+					});
+				}
+				
+				var $previousValue = String($('#number').val());
+				// Grab the hymn number from the user
+				function getHymnNumber(){
+					var $currentValue = $('#number').val();
+					    if($currentValue != $previousValue) {
+					         $previousValue = $currentValue;
+														// Set the verse number to 1 on hymn change
+														$('#verse').val(1);
+					    }
+					return String($('#number').val());				
+				}
+				
+				function getHymnVerse(){
+					return String($('#verse').val());;
+				}
+				
+				// Check to see if the hymn that the user entered exists
+				function isValidHymn(){
+					if($hymns[getHymnNumber()]){
+						return true;
+					}
+					else {
+						return false;
+					}
+				}
+				
+				function isValidVerse(){
+					if($hymn = getSelectedHymn()){
+						if($hymn['text'][getHymnVerse()]){
+							return true;
+						}
+						else {
+							return false;
+						}
+					}
+					else {
+						return false;
+					}
+				}
+				
+				function getSelectedHymn(){
+					if(isValidHymn()){
+						return $hymns[getHymnNumber()];
+					}
+					else {
+						return false;
+					}
+				}
+				
+				function generateVerseHTML($number, $verse){
+					$html = '';
+					
+					// Iterate through each line adding a line break between them
+					$.each($hymns[$number]['text'][$verse], function($key, $value){
+						$html += $value + '<br>';
+					})
+					
+					if($html.includes('**')){
+						$html = 'Hymn is copyrighted :(<br>';
+					}
+					
+					// Return the HTML with the final "<br>" removed
+					return $html.substring(0, $html.length-4);
+				}
+				
+				function refreshScreen(){
+					$displayBox = $("#hymntext");
+					
+					
+					
+					if(isValidHymn() && isValidVerse()){
+						$displayBox.html(generateVerseHTML(getHymnNumber(), getHymnVerse()));
+						resize_text();
+					}
+					else {
+						$displayBox.html('');
+					}
+				}
+				
+				function resize_text(){
+					console.log("Hymn: " + getHymnNumber() + "   Verse: "+getHymnVerse());
+					$('#hymntext').css('font-size', ($defaultFontSize) + 'px')
+					$boundingBox = $('#hymntext')[0].getBoundingClientRect();
+					$areaBox = $('#hymnbox')[0].getBoundingClientRect();
+					if($boundingBox['width'] > $areaBox['width'] || $boundingBox['height'] > $areaBox['height']){
+						$widthMult = $areaBox['width'] / $boundingBox['width'];
+						$heightMult = $areaBox['height'] / $boundingBox['height'];
+						
+						
+						
+						
+						if($widthMult < $heightMult){
+							$('#hymntext').css('font-size', ($defaultFontSize * $widthMult) + 'px');
+							console.log($defaultFontSize * $widthMult);
+						}
+						else {
+							$('#hymntext').css('font-size', ($defaultFontSize * $heightMult) + 'px');
+							console.log($defaultFontSize * $widthMult);
+						}
+					}
+					return $boundingBox;
+				}
+				
+				$(function(){
+					getHymnsJSON('hymns.json');
+					$defaultFontSize = parseInt($('#hymntext').css('font-size'));
+					setTimeout(refreshScreen, 500);
+					console.log("Hymn Verse Display Thingy 7000");
+					console.log("by Phil Wels and TV's Tyler Voigt");
+				});
+				
+				
+				
+				function updateWords(number) {
+					$( "#hymnbox" ).empty();
+		    $.getJSON("hymns.json", function(result){
+		      $.each(result, function(i, field){
+									// Check if entered number is a valid hymn
+									console.log(result['hymns'])
+									if($.inArray(toString(number), result['hymns']) != -1 ){
+										$.each(field[number]['text'][1], function(line, value ){
+											$("#hymnbox").append(value + "<br />");
+										});
+									}
+		      });
+		    });
+		  };
+
+				$("#vsubtract").click(function(){
+				   var b=document.getElementById("verse");
+				   var n=b.value; 
+							n = n -1;
+							if(n<1){ n = 1};
+				   b.value = n; // assign the value of n back to the output
+							refreshScreen();
+				});
+				
+				$("#vadd").click(function(){
+				   var b=document.getElementById("verse");
+				   var n=b.value; 
+							n++;
+				   b.value = n; // assign the value of n back to the output
+							refreshScreen();
+				});
+				
+				$("#hsubtract").click(function(){
+				   var b=document.getElementById("number");
+				   var n=b.value; 
+							n = n -1;
+							if(n<1){ n = 1};
+				   b.value = n; // assign the value of n back to the output
+							
+							
+							// Set the verse number to 1 on hymn change
+							$('#verse').val(1);
+							
+							refreshScreen();
+				});
+				
+				$("#hadd").click(function(){
+				   var b=document.getElementById("number");
+				   var n=b.value; 
+							n++;
+				   b.value = n; // assign the value of n back to the output
+							
+							// Set the verse number to 1 on hymn change
+							$('#verse').val(1);
+							
+							refreshScreen();
+				});
+				
+				document.onkeydown = function(e) {
+				    switch (e.keyCode) {
+				        case 37:
+				            //alert('left');
+													   var b=document.getElementById("verse");
+													   var n=b.value; 
+																n = n -1;
+																if(n<1){ n = 1};
+													   b.value = n; // assign the value of n back to the output
+																refreshScreen();
+				            break;
+				        case 38:
+				            //alert('up');
+													   var b=document.getElementById("verse");
+													   var n=b.value; 
+																n++;
+													   b.value = n; // assign the value of n back to the output
+																refreshScreen();
+				            break;
+				        case 39:
+				            //alert('right');
+													   var b=document.getElementById("verse");
+													   var n=b.value; 
+																n++;
+													   b.value = n; // assign the value of n back to the output
+																refreshScreen();
+				            break;
+				        case 40:
+				            //alert('down');
+													   var b=document.getElementById("verse");
+													   var n=b.value; 
+																n = n -1;
+																if(n<1){ n = 1};
+													   b.value = n; // assign the value of n back to the output
+																refreshScreen();
+				            break;
+				    }
+				};
+
+			</script>
+</body></html>

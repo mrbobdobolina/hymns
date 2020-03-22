@@ -28696,6 +28696,110 @@
 					"Amen"
 				]
 			}
+		},
+		"lp": {
+			"title": "Lord's Prayer",
+			"text": {
+				"1": [
+					"Our Father, who art in heaven,",
+					"hallowed be thy name.",
+					"Thy kingdom come,",
+					"thy will be done on earth as it is in heaven.",
+					"Give us this day our daily bread,",
+					"and forgive us our debts,"
+				],
+				"2": [
+					"as we forgive our debtors.",
+					"And lead us not into temptation",
+					"but deliver us from evil:",
+					"for thine is the kingdom,",
+					"and the power, and the glory, forever,",
+					"Amen."
+				]
+			}
+		},
+		"ac": {
+			"title": "Apostle's Creed",
+			"text": {
+				"1": [
+					"I believe in God the Father Almighty,",
+					"Maker of heaven and earth.",
+					"And in Jesus Christ, His only Son, our Lord;", 
+					"Who was conceived by the Holy Spirit,", 
+					"born of the Virgin Mary,",
+					"suffered under Pontius Pilate,", 
+					"was crucified, died and was buried."
+				],
+				"2": [		
+					"He descended into hell;",
+					"The third day He rose again from the dead;", 
+					"He ascended into heaven and is seated",
+					"at the right hand of God the Father Almighty;",
+					"from there He shall come to judge", 
+					"the living and the dead."
+				],
+				"3": [
+					"I believe in the Holy Spirit;", 
+					"the holy Christian Church,",
+					"the communion of saints;",
+					"the forgiveness of sins;",
+					"the resurrection of the body;",
+					"and the life everlasting. Amen."
+				]
+			}
+		},
+		"nc": {
+			"title": "Nicene Creed",
+			"text": {
+				"1": [
+					"I believe in one God,",
+					"the Father Almighty,",
+					"Maker of heaven and earth",
+					"and of all things visible and invisible.",
+					"And in one Lord Jesus Christ,",
+					"the only-begotten Son of God,"
+				],
+				"2": [		
+					"begotten of His Father before all worlds,",
+					"God of God, Light of Light,",
+					"Very God of Very God, Begotten, not made,",
+					"Being of one substance with the Father,",
+					"by Whom all things were made;",
+					"Who for us men and for our salvation"
+				],
+				"3": [
+					"came down from heaven",
+					"and was incarnate by the Holy Spirit",
+					"of the Virgin Mary and was made man;",
+					"and was crucified also for us under Pontius Pilate.",
+					"He suffered and was buried;",
+					"and the third day He rose again"
+				],
+				"4": [
+					"according to the Scriptures;",
+					"and ascended into heaven,",
+					"and is seated at the right hand of the Father;",
+					"and He shall come again with glory",
+					"to judge both the living and the dead;",
+					"Whose kingdom shall have no end."
+				],
+				"5": [
+					"And I believe in the Holy Spirit,",
+					"the Lord and Giver of life;",
+					"Who proceeds from the Father and the Son,",
+					"Who with the Father and the Son",
+					"together is worshiped and glorified,",
+					"Who spoke by the prophets."
+				],
+				"6": [
+					"And I believe one holy Christian",
+					"and Apostolic Church.",
+					"I acknowledge one Baptism",
+					"for the remission of sins,",
+					"and I look for the resurrection of the dead",
+					"and life of the world to come. Amen."
+				]
+			}
 		}
 	}
 }

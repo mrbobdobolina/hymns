@@ -28697,7 +28697,7 @@
 				]
 			}
 		},
-		"lp": {
+		"901": {
 			"title": "Lord's Prayer",
 			"text": {
 				"1": [
@@ -28718,28 +28718,28 @@
 				]
 			}
 		},
-		"ac": {
+		"902": {
 			"title": "Apostle's Creed",
 			"text": {
 				"1": [
 					"I believe in God the Father Almighty,",
 					"Maker of heaven and earth.",
-					"And in Jesus Christ, His only Son, our Lord;", 
-					"Who was conceived by the Holy Spirit,", 
+					"And in Jesus Christ, His only Son, our Lord;",
+					"Who was conceived by the Holy Spirit,",
 					"born of the Virgin Mary,",
-					"suffered under Pontius Pilate,", 
+					"suffered under Pontius Pilate,",
 					"was crucified, died and was buried."
 				],
-				"2": [		
+				"2": [
 					"He descended into hell;",
-					"The third day He rose again from the dead;", 
+					"The third day He rose again from the dead;",
 					"He ascended into heaven and is seated",
 					"at the right hand of God the Father Almighty;",
-					"from there He shall come to judge", 
+					"from there He shall come to judge",
 					"the living and the dead."
 				],
 				"3": [
-					"I believe in the Holy Spirit;", 
+					"I believe in the Holy Spirit;",
 					"the holy Christian Church,",
 					"the communion of saints;",
 					"the forgiveness of sins;",
@@ -28748,7 +28748,7 @@
 				]
 			}
 		},
-		"nc": {
+		"903": {
 			"title": "Nicene Creed",
 			"text": {
 				"1": [
@@ -28759,7 +28759,7 @@
 					"And in one Lord Jesus Christ,",
 					"the only-begotten Son of God,"
 				],
-				"2": [		
+				"2": [
 					"begotten of His Father before all worlds,",
 					"God of God, Light of Light,",
 					"Very God of Very God, Begotten, not made,",

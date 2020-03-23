@@ -1,0 +1,32 @@
+body {
+  font-family: "CMG Sans";
+  font-weight: bold;
+  padding-top: 15px;
+}
+
+.hymncontainer {
+  width: 1280px;
+  height: 720px;
+  border: 1px solid #999;
+  padding: 50px 100px;
+  background-color: #295ba0;
+  color: #eee;
+}
+
+#hymnbox {
+  width: 100%;
+  height: 100%;
+  border: 0px solid #999;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 72px;
+}
+#hymntext {
+  display: inline-block;
+	/* Comment out the next line ot remove weird centering thing. */
+  margin: auto;
+}
+
+.hymncontainer:fullscreen {
+	cursor:none;
+}

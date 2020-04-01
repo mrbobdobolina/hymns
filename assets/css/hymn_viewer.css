@@ -11,6 +11,9 @@ body {
   padding: 50px 100px;
   background-color: #295ba0;
   color: #eee;
+}
+
+.fixedcontainer {
   position:fixed;
   top:0;
   right:0;
@@ -36,4 +39,10 @@ body {
 
 .input-group, .form-control{
 	margin-bottom:10px;
+}
+
+.infobox {
+   position:absolute;
+   bottom:30px;
+   right:30px;
 }

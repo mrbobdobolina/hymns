@@ -390,8 +390,30 @@ function refreshScreen(){
 	log(LOG_DEBUG_MED, 'Function Called: refreshScreen()');
 
 	$("#hymntext").html(generateVerseHTML(getHymnNo(), getVerseNo()));
-	resize_text()
+	resize_text();
+	cornerInfo();
+
 }
+
+/**
+ * Fucntion to update the corner text to display hymn and verse number
+ */
+function cornerInfo(){
+	log(LOG_DEBUG_MED, 'Function Called: cornerInfo()');
+
+	var currentHymn = getHymnNo();
+	var currentVerse = getVerseNo();
+	
+	var showInfo =$('#showInfo')[0].checked;
+	
+	if(currentHymn < 900 && showInfo) {
+		$("#infobox").html("Hymn " + currentHymn + " Verse " + currentVerse );
+	}
+	else {
+		$("#infobox").html("");
+	}
+}
+
 
 /**
  * Takes the hymn canvas full screen.

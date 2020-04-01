@@ -23,9 +23,10 @@
 <body onResize="refreshScreen();">
 
 	<!-- START Controls -->
-	<div class="container">
+	<div class="container-fluid">
+		<div class="col-md-2">
 		<div class="form-group row text-center">
-			<div class="col">
+			<div class="col-12">
 				<select class="form-control" default="tester" onChange="changeHymnNoTo(this.value);">
 					<option value="1">Hymns</option>
 					<option value="901">Lord's Prayer</option>
@@ -34,7 +35,7 @@
 				</select>
 			</div>
 
-			<div class="col-3 input-group">
+			<div class="col-12 input-group">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Hymn #</span>
 				</div>
@@ -42,8 +43,7 @@
 				<input id="number" name="number" class="form-control" value="1" oninput="refreshScreen();" onkeydown="refreshScreen();">
 				<button style="flex:0.25;" class="btn btn-outline-success form-control" onClick="changeHymnNoBy(1)">+</button>
 			</div>
-
-			<div class="col-3 input-group">
+			<div class="col-12 input-group">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Verse #</span>
 				</div>
@@ -52,10 +52,11 @@
 				<button style="flex:0.25;" class="btn btn-outline-success form-control" onClick="changeVerseNoBy(1);">+</button>
 			</div>
 
-			<div class="col-2">
+			<div class="col-12">
 		 		<button type="button" class="btn btn-primary form-control" onClick="goFullScreen();">Go Fullscreen</button>
 			</div>
 		</div>
+	</div>
 		<!-- END Controls -->
 
 		<div class="hymncontainer align-middle" id="hymncontainer">
@@ -63,7 +64,7 @@
 				<div class="align-self-center" id="hymntext"></div>
 			</div>
 		</div>
-	</div>
+
 
 </body>
 </html>

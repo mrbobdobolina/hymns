@@ -5,12 +5,15 @@ body {
 }
 
 .hymncontainer {
-  width: 1280px;
-  height: 720px;
+  width: 1940px;
+  height: 1100px;
   border: 1px solid #999;
   padding: 50px 100px;
   background-color: #295ba0;
   color: #eee;
+  position:fixed;
+  top:0;
+  right:0;
 }
 
 #hymnbox {
@@ -29,4 +32,8 @@ body {
 
 .hymncontainer:fullscreen {
 	cursor:none;
+}
+
+.input-group, .form-control{
+	padding-bottom:50px;
 }

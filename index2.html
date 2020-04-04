@@ -40,7 +40,7 @@
 					<span class="input-group-text">Hymn #</span>
 				</div>
 				<button style="flex:0.25;" class="btn btn-outline-danger form-control" onClick="changeHymnNoBy(-1)">-</button>
-				<input id="number" name="number" class="form-control" value="1" oninput="refreshScreen();" onkeydown="refreshScreen();">
+				<input id="number" name="number" class="form-control" value="1" oninput="refreshScreen();changeVerseNoTo(1);" onkeydown="refreshScreen();changeVerseNoTo(1);">
 				<button style="flex:0.25;" class="btn btn-outline-success form-control" onClick="changeHymnNoBy(1)">+</button>
 			</div>
 			<div class="col-12 input-group">

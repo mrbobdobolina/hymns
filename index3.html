@@ -23,7 +23,7 @@
 <body onResize="refreshScreen();">
 
 	<!-- START Controls -->
-	<div class="container">
+	<div class="container pt-4">
 		<div class="form-group row text-center">
 			<div class="col">
 				<select class="form-control" default="tester" onChange="changeHymnNoTo(this.value);">
@@ -39,7 +39,7 @@
 					<span class="input-group-text">Hymn #</span>
 				</div>
 				<button style="flex:0.25;" class="btn btn-outline-danger form-control" onClick="changeHymnNoBy(-1)">-</button>
-			<input id="number" name="number" class="form-control" value="1" oninput="refreshScreen();changeVerseNoTo(1);" onkeydown="refreshScreen();changeVerseNoTo(1);">
+				<input id="number" name="number" class="form-control" value="1" oninput="refreshScreen();changeVerseNoTo(1);" onkeydown="refreshScreen();changeVerseNoTo(1);">
 				<button style="flex:0.25;" class="btn btn-outline-success form-control" onClick="changeHymnNoBy(1)">+</button>
 			</div>
 
@@ -52,13 +52,29 @@
 				<button style="flex:0.25;" class="btn btn-outline-success form-control" onClick="changeVerseNoBy(1);">+</button>
 			</div>
 
-			<div class="col-2">
+			<div class="col-2 control win-docked">
 		 		<button type="button" class="btn btn-primary form-control" onClick="goFullScreen();">Go Fullscreen</button>
+			</div>
+
+			<div class="col-2 control win-docked">
+		 		<button type="button" class="btn btn-primary form-control" onClick="popOut();">Pop Out</button>
+			</div>
+
+			<div class="col-4 control win-popout" style="display:none;">
+				<button type="button" class="btn btn-secondary form-control" onClick="popOut();">Close Pop Out</button>
+			</div>
+			
+				<div class="col-12 input-group">
+			  <div class="form-check">
+			    <input type="checkbox" class="form-check-input" id="showInfo" checked>
+			    <label class="form-check-label" for="exampleCheck1">Show Hymn Information</label>
+			  </div>
 			</div>
 		</div>
 		<!-- END Controls -->
 
-		<div class="hymncontainer align-middle" id="hymncontainer">
+		<div class="hymncontainer bootstrapcontainer align-middle" id="hymncontainer">
+			<div class="infobox" id="infobox"></div>
 			<div class="d-flex" id="hymnbox">
 				<div class="align-self-center" id="hymntext"></div>
 			</div>

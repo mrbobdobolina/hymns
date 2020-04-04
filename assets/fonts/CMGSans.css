@@ -1,8 +1,16 @@
 @font-face {
   font-family: "CMG Sans";
-  src: url('CMGSans-Bold.ttf');
+  src: url('CMGSans-Regular.ttf');
   style:normal;
   weight:400;
+  stretch:100;
+  index:0
+}
+@font-face {
+  font-family: "CMG Sans";
+  src: url('CMGSans-Bold.ttf');
+  style:normal;
+  weight:700;
   stretch:100;
   index:0
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+	<title>Hymn Viewer v0.8</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- HymnViewer core CSS -->
+	<link href="assets/css/hymn_viewer.css" rel="stylesheet">
+	<link href="assets/fonts/CMGSans.css" rel="stylesheet">
+
+
+	<script src="assets/js/jquery-3.4.1.min.js"></script>
+	<script src="assets/js/jquery.fittext.js"></script>
+	<script src="assets/js/hymn_viewer.js"></script>
+
+</head>
+<body onResize="refreshScreen();" style="height:100%;">
+	<div style="display:none;">
+		<input id="number" name="number" class="form-control" value="1" oninput="refreshScreen();" onkeydown="refreshScreen();">
+		<input id="verse" name="verse" type="number" class="form-control" value="1" oninput="refreshScreen();" onkeydown="refreshScreen();">
+	</div>
+
+
+	<div class="hymncontainer align-middle" style="width: 100%; height: 100%;" id="hymncontainer">
+		<div class="infobox" id="infobox">s</div>
+		<div class="d-flex" id="hymnbox">
+			<div class="align-self-center" id="hymntext"></div>
+		</div>
+	</div>
+</body>

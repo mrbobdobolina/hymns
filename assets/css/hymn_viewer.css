@@ -1,16 +1,50 @@
 body {
   font-family: "CMG Sans";
   font-weight: bold;
-  padding-top: 15px;
 }
 
 .hymncontainer {
+	position:relative;
   width: 1940px;
   height: 1100px;
   border: 1px solid #999;
   padding: 50px 100px;
   background-color: #295ba0;
   color: #eee;
+}
+
+.hymncontainer.bootstrapcontainer {
+	width: 510px;
+  height: 287px;
+	padding: 20px 40px;
+}
+
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+	.hymncontainer.bootstrapcontainer {
+		width: 690px;
+	  height: 388px;
+		padding: 30px 60px;
+	}
+}
+
+@media (min-width: 992px) {
+	.hymncontainer.bootstrapcontainer {
+		width: 930px;
+	  height: 523px;
+		padding: 40px 80px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.hymncontainer.bootstrapcontainer {
+		width: 1110px;
+	  height: 624px;
+		padding: 50px 100px;
+	}
 }
 
 .fixedcontainer {
@@ -42,6 +76,9 @@ body {
 }
 
 .infobox {
+	font-size: 1.3em;
+   font-family: "CMG Sans";
+   font-weight: normal;
    position:absolute;
    bottom:30px;
    right:30px;

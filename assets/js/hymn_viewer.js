@@ -26,7 +26,7 @@ function log($level, $msg){
 			case LOG_DEBUG_HIGH: $lvl_txt = 'DEBUG'; break;
 		}
 
-		console.log('HymnViewer v0.8 [' + $lvl_txt + ']: ' + $msg)
+		console.log('HymnViewer v0.9 [' + $lvl_txt + ']: ' + $msg)
 
 		return $msg;
 	}
@@ -57,32 +57,35 @@ $(document).keydown(function(e) {
 
 	log(LOG_DEBUG_HIGH, '$(document).keydown() Keycode:' + e.which);
 
-	// Tie the arrow keys to the verse number
-	switch (e.which) {
-		case 37: // Left
+	// Don't map keys on the popout window
+	if(!$(location).attr("href").includes('popout')){
+		// Tie the arrow keys to the verse number
+		switch (e.which) {
+			case 37: // Left
 			log(LOG_DEBUG_MED, '$(document).keydown() Key Press: Left');
 			changeVerseNoBy(-1);
 			e.preventDefault();
 			break;
-		case 38: // Up
+			case 38: // Up
 			log(LOG_DEBUG_MED, '$(document).keydown() Key Press: Up');
 			changeVerseNoBy(-1);
 			e.preventDefault();
 			break;
-		case 39: // Right
+			case 39: // Right
 			log(LOG_DEBUG_MED, '$(document).keydown() Key Press: Down');
 			changeVerseNoBy(1);
 			e.preventDefault();
 			break;
-		case 40: // Down
+			case 40: // Down
 			log(LOG_DEBUG_MED, '$(document).keydown() Key Press: Down');
 			changeVerseNoBy(1);
 			e.preventDefault();
 			break;
-	}
+		}
 
-	// Easter Egg
-	eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('6(e.9==$5[$2]){$2++;6($2>=$5.c){d(f,\'a 7 b! a 7 b k! j!\');i(h*4+g+3)}}8{6(e.9==$5[0]){$2=1}8{$2=0}}',21,21,'||secret_pos|||secret|if|IS|else|which|HE|RISEN|length|log||LOG_WARN|10|75|changeHymnNoTo|ALLELUIA|INDEED'.split('|'),0,{}))
+		// Easter Egg
+		eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('6(e.9==$5[$2]){$2++;6($2>=$5.c){d(f,\'a 7 b! a 7 b k! j!\');i(h*4+g+3)}}8{6(e.9==$5[0]){$2=1}8{$2=0}}',21,21,'||secret_pos|||secret|if|IS|else|which|HE|RISEN|length|log||LOG_WARN|10|75|changeHymnNoTo|ALLELUIA|INDEED'.split('|'),0,{}))
+	}
 });
 
 /**
@@ -227,6 +230,11 @@ function changeHymnNoTo($hymn_no){
 			// Set the new hymn
 			$('#number').val($hymn_no);
 
+			// Check for a popout window
+			if(isPoppedOut()){
+				$popOutWin.$('#number').val($hymn_no);
+			}
+
 			// Verse back to 1
 			changeVerseNoTo(1);
 
@@ -259,6 +267,10 @@ function changeVerseNoTo($verse_no){
 		if($verse_no != getVerseNo()){
 			// Set the new verse
 			$('#verse').val($verse_no);
+
+			if(isPoppedOut()){
+				$popOutWin.$('#verse').val($verse_no);
+			}
 
 			// Set the new text
 			refreshScreen();
@@ -393,6 +405,11 @@ function refreshScreen(){
 	resize_text();
 	cornerInfo();
 
+	if(isPoppedOut()){
+		$popOutWin.refreshScreen();
+		$popOutWin.cornerInfo();
+	}
+
 }
 
 /**
@@ -403,15 +420,19 @@ function cornerInfo(){
 
 	var currentHymn = getHymnNo();
 	var currentVerse = getVerseNo();
-	
-	var showInfo =$('#showInfo')[0].checked;
-	
-	if(currentHymn < 900 && showInfo) {
-		$("#infobox").html("Hymn " + currentHymn + " Verse " + currentVerse );
+
+	if($('#showInfo').length){
+		var showInfo = $('#showInfo')[0].checked;
+
+		if(currentHymn < 900 && showInfo) {
+			$("#infobox").html("Hymn " + currentHymn + " Verse " + currentVerse );
+		}
+		else {
+			$("#infobox").html("");
+		}
+
 	}
-	else {
-		$("#infobox").html("");
-	}
+
 }
 
 
@@ -428,5 +449,50 @@ function goFullScreen(){
 	}
 	else if(canvas.webkitRequestFullScreen){
 		canvas.webkitRequestFullScreen();
+	}
+}
+
+/**
+ * Opens a popup window useful for showing hymns on a second monitor.
+ */
+var $popOutWin = false;
+function popOut(){
+	log(LOG_DEBUG_MED, 'Function Called: popOut()');
+
+	if(isPoppedOut()){
+		$popOutWin.close();
+		$popOutWin = false;
+
+		$('.control.win-docked').show();
+		$('.control.win-popout').hide();
+	}
+	else {
+		$popOutWin = window.open('popout.html', 'popout', `scrollbars=no,location=no,toolbar=no,menubar=no`);
+		setTimeout(function(){
+			$popOutWin.$('#number').val(getHymnNo());
+			$popOutWin.$('#verse').val(getVerseNo());
+			$popOutWin.refreshScreen();
+		}, 1000);
+
+		$('.control.win-docked').hide();
+		$('.control.win-popout').show();
+	}
+}
+
+/**
+ * Checks the status of the poped out window.
+ *
+ * @return {bool} True if window is open; False if window is closed.
+ */
+function isPoppedOut(){
+	log(LOG_DEBUG_MED, 'Function Called: isPoppedOut()');
+	if($popOutWin.closed === false){
+		log(LOG_DEBUG_HIGH, 'popOut() Is popped out.');
+		return true;
+	}
+	else {
+		$popOutWin = false;
+		log(LOG_DEBUG_HIGH, 'popOut() Is not popped out.');
+		return false;
 	}
 }

@@ -437,20 +437,40 @@ function cornerInfo(){
 
 
 /**
+ * Fucntion to update the corner text to display hymn and verse number
+ */
+function cornerInfo(){
+	log(LOG_DEBUG_MED, 'Function Called: cornerInfo()');
+
+	var currentHymn = getHymnNo();
+	var currentVerse = getVerseNo();
+
+	if($('#showInfo').length){
+		var showInfo = $('#showInfo')[0].checked;
+
+		if(currentHymn < 900 && showInfo) {
+			$("#infobox").html("Hymn " + currentHymn + " Verse " + currentVerse );
+		}
+		else {
+			$("#infobox").html("");
+		}
+
+	}
+
+}
+
+/**
  * Takes the hymn canvas full screen.
  */
-function goFullScreen(){
-	log(LOG_DEBUG_MED, 'Function Called: goFullScreen()');
-	log(LOG_INFO, 'Entering fullscreen.');
-
-	var canvas = $('.hymncontainer')[0];
-	if(canvas.requestFullscreen){
-		canvas.requestFullscreen();
-	}
-	else if(canvas.webkitRequestFullScreen){
-		canvas.webkitRequestFullScreen();
-	}
+function hymnInfoCheckBox(){
+	log(LOG_DEBUG_MED, 'Function Called: hymnInfoCheckBox()');
+	log(LOG_INFO, 'changing checkbox.');
+	
+	$popOutWin.$('#showInfo').attr('checked', this.checked);
+	
+	refreshScreen();
 }
+
 
 /**
  * Opens a popup window useful for showing hymns on a second monitor.
@@ -472,7 +492,7 @@ function popOut(){
 			$popOutWin.$('#number').val(getHymnNo());
 			$popOutWin.$('#verse').val(getVerseNo());
 			$popOutWin.refreshScreen();
-		}, 1000);
+		}, 5000);
 
 		$('.control.win-docked').hide();
 		$('.control.win-popout').show();

@@ -26,7 +26,7 @@ function log($level, $msg){
 			case LOG_DEBUG_HIGH: $lvl_txt = 'DEBUG'; break;
 		}
 
-		console.log('HymnViewer v0.9 [' + $lvl_txt + ']: ' + $msg)
+		console.log('HymnViewer v1.0 [' + $lvl_txt + ']: ' + $msg)
 
 		return $msg;
 	}
@@ -404,36 +404,16 @@ function refreshScreen(){
 	$("#hymntext").html(generateVerseHTML(getHymnNo(), getVerseNo()));
 	resize_text();
 	cornerInfo();
+	updateColors();
 
 	if(isPoppedOut()){
 		$popOutWin.refreshScreen();
 		$popOutWin.cornerInfo();
+		$popOutWin.updateColors();
 	}
 
 }
 
-/**
- * Fucntion to update the corner text to display hymn and verse number
- */
-function cornerInfo(){
-	log(LOG_DEBUG_MED, 'Function Called: cornerInfo()');
-
-	var currentHymn = getHymnNo();
-	var currentVerse = getVerseNo();
-
-	if($('#showInfo').length){
-		var showInfo = $('#showInfo')[0].checked;
-
-		if(currentHymn < 900 && showInfo) {
-			$("#infobox").html("Hymn " + currentHymn + " Verse " + currentVerse );
-		}
-		else {
-			$("#infobox").html("");
-		}
-
-	}
-
-}
 
 
 /**
@@ -492,10 +472,12 @@ function popOut(){
 			$popOutWin.$('#number').val(getHymnNo());
 			$popOutWin.$('#verse').val(getVerseNo());
 			$popOutWin.refreshScreen();
+			
 		}, 5000);
-
+		
 		$('.control.win-docked').hide();
 		$('.control.win-popout').show();
+
 	}
 }
 
@@ -515,4 +497,100 @@ function isPoppedOut(){
 		log(LOG_DEBUG_HIGH, 'popOut() Is not popped out.');
 		return false;
 	}
+}
+
+/**
+ * updates background color of canvas  and sets a cookie
+ *
+ * 
+ */
+function updateBgColor(jscolor){
+	log(LOG_DEBUG_MED, 'Function Called: updateBgColor()');
+	document.getElementById('hymncontainer').style.backgroundColor = '#' + jscolor;
+	
+	if(isPoppedOut()){
+		$popOutWin.document.getElementById('hymncontainer').style.backgroundColor = '#' + jscolor;;
+	}	
+	setCookie("hymnBGcolor", jscolor, 365);
+}
+
+
+/**
+ * updates text color and sets a cookie
+ *
+ */
+function updateTxColor(jscolor){
+	log(LOG_DEBUG_MED, 'Function Called: updateBgColor()');
+	document.getElementById('hymncontainer').style.color = '#' + jscolor;
+	
+	if(isPoppedOut()){
+		$popOutWin.document.getElementById('hymncontainer').style.color = '#' + jscolor;;
+	}	
+	setCookie("hymnTXcolor", jscolor, 365);
+}
+
+
+/**
+ * updates colors using the currently stored cookie values
+ *
+ */
+function updateColors(){
+	log(LOG_DEBUG_MED, 'Function Called: updateColors()');
+	
+	$bgcolor = getCookie("hymnBGcolor");
+	$txcolor = getCookie("hymnTXcolor");
+	
+	document.getElementById('bgcolor').value = $bgcolor;
+	document.getElementById('txcolor').value = $txcolor;
+	document.getElementById('bgcolor').style.backgroundColor = '#' + $bgcolor;
+	document.getElementById('txcolor').style.backgroundColor = '#' + $txcolor;
+	
+	if($bgcolor != ""){
+		document.getElementById('hymncontainer').style.backgroundColor = '#' + $bgcolor;	
+		if(isPoppedOut()){
+			$popOutWin.document.getElementById('hymncontainer').style.backgroundColor = '#' + $bgcolor;
+		}
+	}
+	
+	if($txcolor != ""){
+		document.getElementById('hymncontainer').style.color = '#' + $txcolor;	
+		if(isPoppedOut()){
+			$popOutWin.document.getElementById('hymncontainer').style.color = '#' + $txcolor;
+		}
+	}
+
+}
+
+
+
+/**
+ * save color cookie
+ *
+ */
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+
+/**
+ * reads cookies
+ *
+ */
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }

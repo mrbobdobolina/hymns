@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
-	<title>Hymn Viewer v0.9</title>
+	<title>Hymn Viewer v1.0</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -18,10 +18,10 @@
 	<script src="assets/js/jquery-3.4.1.min.js"></script>
 	<script src="assets/js/jquery.fittext.js"></script>
 	<script src="assets/js/hymn_viewer.js"></script>
+	<script src="assets/js/jscolor.js"></script>
 
 </head>
 <body onResize="refreshScreen();">
-
 	<!-- START Controls -->
 	<div class="container pt-4">
 		<div class="form-group row text-center">
@@ -64,12 +64,30 @@
 				<button type="button" class="btn btn-secondary form-control" onClick="popOut();">Close Pop Out</button>
 			</div>
 			
-				<div class="col-12 input-group">
+			<div class="col-4 input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Background Color</span>
+				</div>
+			<input class="jscolor form-control" onchange="updateBgColor(this.jscolor)" id="bgcolor" value="295ba0" />
+			</div>
+			
+			<div class="col-4 input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Text Color</span>
+				</div>
+			<input class="jscolor form-control" onchange="updateTxColor(this.jscolor)" id="txcolor" value="eeeeee" />
+			</div>
+			
+				<div class="col-4 input-group">
 			  <div class="form-check">
 			    <input type="checkbox" class="form-check-input" id="showInfo" onChange="if(isPoppedOut()){$popOutWin.$('#showInfo').attr('checked', this.checked); $popOutWin.refreshScreen(); refreshScreen();}" checked>
 			    <label class="form-check-label" for="exampleCheck1">Show Hymn Information</label>
 			  </div>
 			</div>
+			
+
+			
+		
 		</div>
 		<!-- END Controls -->
 
@@ -80,6 +98,7 @@
 			</div>
 		</div>
 	</div>
+
 
 </body>
 </html>

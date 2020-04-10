@@ -13,12 +13,14 @@
 	<!-- HymnViewer core CSS -->
 	<link href="assets/css/hymn_viewer.css" rel="stylesheet">
 	<link href="assets/fonts/CMGSans.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/spectrum.min.css" >
 
 
 	<script src="assets/js/jquery-3.4.1.min.js"></script>
 	<script src="assets/js/jquery.fittext.js"></script>
 	<script src="assets/js/hymn_viewer.js"></script>
-	<script src="assets/js/jscolor.js"></script>
+	<script src="assets/js/spectrum.min.js"></script>
+
 
 </head>
 <body onResize="refreshScreen();">
@@ -65,17 +67,17 @@
 			</div>
 			
 			<div class="col-4 input-group">
-				<div class="input-group-prepend">
+				<div class="input-group">
 					<span class="input-group-text">Background Color</span>
 				</div>
-			<input class="jscolor form-control" onchange="updateBgColor(this.jscolor)" id="bgcolor" value="295ba0" />
+			<input class="form-control" onchange="updateBgColor(this.value)" id="bgcolor" value="295ba0" />
 			</div>
 			
 			<div class="col-4 input-group">
-				<div class="input-group-prepend">
+				<div class="input-group">
 					<span class="input-group-text">Text Color</span>
 				</div>
-			<input class="jscolor form-control" onchange="updateTxColor(this.jscolor)" id="txcolor" value="eeeeee" />
+			<input class="form-control" onchange="updateTxColor(this.value)" id="txcolor" value="eeeeee" />
 			</div>
 			
 				<div class="col-4 input-group">
@@ -85,8 +87,24 @@
 			  </div>
 			</div>
 			
-
-			
+<script>
+	$('#bgcolor').spectrum({
+  type: "text",
+  hideAfterPaletteSelect: "true",
+  showInput: "true",
+  showAlpha: "false",
+  showButtons: "false",
+  allowEmpty: "false"
+	});
+	$('#txcolor').spectrum({
+  type: "text",
+  hideAfterPaletteSelect: "true",
+  showInput: "true",
+  showAlpha: "false",
+  showButtons: "false",
+  allowEmpty: "false"
+	});
+</script>			
 		
 		</div>
 		<!-- END Controls -->

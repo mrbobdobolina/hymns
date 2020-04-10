@@ -468,6 +468,7 @@ function popOut(){
 	}
 	else {
 		$popOutWin = window.open('popout.html', 'popout', `scrollbars=no,location=no,toolbar=no,menubar=no`);
+		
 		setTimeout(function(){
 			$popOutWin.$('#number').val(getHymnNo());
 			$popOutWin.$('#verse').val(getVerseNo());
@@ -506,10 +507,11 @@ function isPoppedOut(){
  */
 function updateBgColor(jscolor){
 	log(LOG_DEBUG_MED, 'Function Called: updateBgColor()');
-	document.getElementById('hymncontainer').style.backgroundColor = '#' + jscolor;
+	log('jscolor');
+	document.getElementById('hymncontainer').style.backgroundColor =  jscolor;
 	
 	if(isPoppedOut()){
-		$popOutWin.document.getElementById('hymncontainer').style.backgroundColor = '#' + jscolor;;
+		$popOutWin.document.getElementById('hymncontainer').style.backgroundColor =  jscolor;;
 	}	
 	setCookie("hymnBGcolor", jscolor, 365);
 }
@@ -521,10 +523,10 @@ function updateBgColor(jscolor){
  */
 function updateTxColor(jscolor){
 	log(LOG_DEBUG_MED, 'Function Called: updateBgColor()');
-	document.getElementById('hymncontainer').style.color = '#' + jscolor;
+	document.getElementById('hymncontainer').style.color =  jscolor;
 	
 	if(isPoppedOut()){
-		$popOutWin.document.getElementById('hymncontainer').style.color = '#' + jscolor;;
+		$popOutWin.document.getElementById('hymncontainer').style.color = jscolor;;
 	}	
 	setCookie("hymnTXcolor", jscolor, 365);
 }
@@ -542,20 +544,20 @@ function updateColors(){
 	
 	document.getElementById('bgcolor').value = $bgcolor;
 	document.getElementById('txcolor').value = $txcolor;
-	document.getElementById('bgcolor').style.backgroundColor = '#' + $bgcolor;
-	document.getElementById('txcolor').style.backgroundColor = '#' + $txcolor;
+	document.getElementById('bgcolor').style.backgroundColor = $bgcolor;
+	document.getElementById('txcolor').style.backgroundColor =  $txcolor;
 	
 	if($bgcolor != ""){
-		document.getElementById('hymncontainer').style.backgroundColor = '#' + $bgcolor;	
+		document.getElementById('hymncontainer').style.backgroundColor =  $bgcolor;	
 		if(isPoppedOut()){
-			$popOutWin.document.getElementById('hymncontainer').style.backgroundColor = '#' + $bgcolor;
+			$popOutWin.document.getElementById('hymncontainer').style.backgroundColor =  $bgcolor;
 		}
 	}
 	
 	if($txcolor != ""){
-		document.getElementById('hymncontainer').style.color = '#' + $txcolor;	
+		document.getElementById('hymncontainer').style.color =  $txcolor;	
 		if(isPoppedOut()){
-			$popOutWin.document.getElementById('hymncontainer').style.color = '#' + $txcolor;
+			$popOutWin.document.getElementById('hymncontainer').style.color =  $txcolor;
 		}
 	}
 

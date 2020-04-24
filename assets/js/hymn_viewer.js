@@ -474,7 +474,7 @@ function popOut(){
 			$popOutWin.$('#verse').val(getVerseNo());
 			$popOutWin.refreshScreen();
 			
-		}, 5000);
+		}, 9000);
 		
 		$('.control.win-docked').hide();
 		$('.control.win-popout').show();
@@ -562,6 +562,8 @@ function updateColors(){
 	}
 
 }
+
+
 
 
 

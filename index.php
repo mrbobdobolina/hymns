@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
-	<title>Hymn Viewer v1.0</title>
+	<title>Hymn Viewer v2.0</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +33,15 @@
 					<option value="901">Lord's Prayer</option>
 					<option value="902">Apostle's Creed</option>
 					<option value="903">Nicene Creed</option>
+					<option value="904">Confession of Sin</option>
+				 <option value="905">Kyrie Eleison</option>
+					<option value="906">Gloria</option>
+					<option value="907">Angus Dei</option>
+					<option value="908">Sanctus</option>
+					<option value="909">Create in Me</option>
+						<option value="910">Nunc Dimittis</option>
+						<option value="911">Venite Exultemus</option>
+						<option value="912">Te Deum Laudamus</option>
 				</select>
 			</div>
 
@@ -58,37 +67,46 @@
 		 		<button type="button" class="btn btn-primary form-control" onClick="goFullScreen();">Go Fullscreen</button>
 			</div>
 
-			<div class="col-2 control win-docked">
-		 		<button type="button" class="btn btn-primary form-control" onClick="popOut();">Pop Out</button>
-			</div>
+				<div class="col">
+					<select id="image_back" class="form-control" default="tester" >
+						<option value="">None</option>
+						<?php
+						foreach(glob("images/".'*') as $filename){
+							echo '<option value="images/'.basename($filename).'">'.basename($filename).'</option>';
+					}
+					 ?>
+					</select>
+				</div>
 
 			<div class="col-4 control win-popout" style="display:none;">
 				<button type="button" class="btn btn-secondary form-control" onClick="popOut();">Close Pop Out</button>
 			</div>
-			
+
 			<div class="col-4 input-group">
 				<div class="input-group">
 					<span class="input-group-text">Background Color</span>
 				</div>
 			<input class="form-control" onchange="updateBgColor(this.value)" id="bgcolor" value="295ba0" />
 			</div>
-			
+
 			<div class="col-4 input-group">
 				<div class="input-group">
 					<span class="input-group-text">Text Color</span>
 				</div>
 			<input class="form-control" onchange="updateTxColor(this.value)" id="txcolor" value="eeeeee" />
 			</div>
-			
+
 				<div class="col-4 input-group">
 			  <div class="form-check">
 			    <input type="checkbox" class="form-check-input" id="showInfo" onChange="if(isPoppedOut()){$popOutWin.$('#showInfo').attr('checked', this.checked); $popOutWin.refreshScreen(); refreshScreen();}" checked>
 			    <label class="form-check-label" for="exampleCheck1">Show Hymn Information</label>
 			  </div>
 			</div>
-			
 
-			
+
+
+
+
 <script>
 	$('#bgcolor').spectrum({
   type: "text",
@@ -106,18 +124,27 @@
   showButtons: "false",
   allowEmpty: "false"
 	});
-</script>			
-		
+
+	$('#image_back').change(function() {
+		$('#the_back_image').attr('src', $('#image_back').val());
+	});
+</script>
+
 		</div>
 		<!-- END Controls -->
 
 		<div class="hymncontainer bootstrapcontainer align-middle" id="hymncontainer">
+			<img id="the_back_image" src="" />
 			<div class="infobox" id="infobox"></div>
 			<div class="d-flex" id="hymnbox">
 				<div class="align-self-center" id="hymntext"></div>
 			</div>
+
 		</div>
+
 	</div>
+
+
 
 
 </body>

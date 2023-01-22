@@ -13,7 +13,7 @@ const LOG_DEBUG_LOW = 5;
 const LOG_DEBUG_MED = 6;
 const LOG_DEBUG_HIGH = 7;
 function log($level, $msg){
-	if($level <= LOG_WARN){ // Set the logging level here
+	if($level <= LOG_DEBUG_HIGH ){ // Set the logging level here
 
 		switch($level){
 			case LOG_ABOUT:	     $lvl_txt = 'ABOUT'; break;
@@ -445,9 +445,9 @@ function cornerInfo(){
 function hymnInfoCheckBox(){
 	log(LOG_DEBUG_MED, 'Function Called: hymnInfoCheckBox()');
 	log(LOG_INFO, 'changing checkbox.');
-	
+
 	$popOutWin.$('#showInfo').attr('checked', this.checked);
-	
+
 	refreshScreen();
 }
 
@@ -468,14 +468,14 @@ function popOut(){
 	}
 	else {
 		$popOutWin = window.open('popout.html', 'popout', `scrollbars=no,location=no,toolbar=no,menubar=no`);
-		
+
 		setTimeout(function(){
 			$popOutWin.$('#number').val(getHymnNo());
 			$popOutWin.$('#verse').val(getVerseNo());
 			$popOutWin.refreshScreen();
-			
+
 		}, 9000);
-		
+
 		$('.control.win-docked').hide();
 		$('.control.win-popout').show();
 
@@ -503,16 +503,16 @@ function isPoppedOut(){
 /**
  * updates background color of canvas  and sets a cookie
  *
- * 
+ *
  */
 function updateBgColor(jscolor){
 	log(LOG_DEBUG_MED, 'Function Called: updateBgColor()');
 	log('jscolor');
 	document.getElementById('hymncontainer').style.backgroundColor =  jscolor;
-	
+
 	if(isPoppedOut()){
 		$popOutWin.document.getElementById('hymncontainer').style.backgroundColor =  jscolor;;
-	}	
+	}
 	setCookie("hymnBGcolor", jscolor, 365);
 }
 
@@ -524,10 +524,10 @@ function updateBgColor(jscolor){
 function updateTxColor(jscolor){
 	log(LOG_DEBUG_MED, 'Function Called: updateBgColor()');
 	document.getElementById('hymncontainer').style.color =  jscolor;
-	
+
 	if(isPoppedOut()){
 		$popOutWin.document.getElementById('hymncontainer').style.color = jscolor;;
-	}	
+	}
 	setCookie("hymnTXcolor", jscolor, 365);
 }
 
@@ -538,24 +538,24 @@ function updateTxColor(jscolor){
  */
 function updateColors(){
 	log(LOG_DEBUG_MED, 'Function Called: updateColors()');
-	
+
 	$bgcolor = getCookie("hymnBGcolor");
 	$txcolor = getCookie("hymnTXcolor");
-	
+
 	document.getElementById('bgcolor').value = $bgcolor;
 	document.getElementById('txcolor').value = $txcolor;
 	document.getElementById('bgcolor').style.backgroundColor = $bgcolor;
 	document.getElementById('txcolor').style.backgroundColor =  $txcolor;
-	
+
 	if($bgcolor != ""){
-		document.getElementById('hymncontainer').style.backgroundColor =  $bgcolor;	
+		document.getElementById('hymncontainer').style.backgroundColor =  $bgcolor;
 		if(isPoppedOut()){
 			$popOutWin.document.getElementById('hymncontainer').style.backgroundColor =  $bgcolor;
 		}
 	}
-	
+
 	if($txcolor != ""){
-		document.getElementById('hymncontainer').style.color =  $txcolor;	
+		document.getElementById('hymncontainer').style.color =  $txcolor;
 		if(isPoppedOut()){
 			$popOutWin.document.getElementById('hymncontainer').style.color =  $txcolor;
 		}

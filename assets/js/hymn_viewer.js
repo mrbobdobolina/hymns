@@ -2,7 +2,7 @@
  * Prints a log message to the console only if it meets the logging threshold.
  *
  * @param {int} $level Level of severety of the message. (See below for values).
- * @param {int} $msg   The message to print to the console.
+ * @param {int} $msg	 The message to print to the console.
  */
 const LOG_ABOUT = 0;
 const LOG_FATAL = 1;
@@ -13,15 +13,15 @@ const LOG_DEBUG_LOW = 5;
 const LOG_DEBUG_MED = 6;
 const LOG_DEBUG_HIGH = 7;
 function log($level, $msg){
-	if($level <= LOG_DEBUG_HIGH ){ // Set the logging level here
+	if($level <= LOG_WARN ){ // Set the logging level here
 
 		switch($level){
-			case LOG_ABOUT:	     $lvl_txt = 'ABOUT'; break;
-			case LOG_FATAL:      $lvl_txt = 'FATAL'; break;
-			case LOG_ERROR:      $lvl_txt = 'ERROR'; break;
-			case LOG_WARN:       $lvl_txt = 'WARN';  break;
-			case LOG_INFO:       $lvl_txt = 'INFO';  break;
-			case LOG_DEBUG_LOW:  $lvl_txt = 'DEBUG'; break;
+			case LOG_ABOUT:			 $lvl_txt = 'ABOUT'; break;
+			case LOG_FATAL:			$lvl_txt = 'FATAL'; break;
+			case LOG_ERROR:			$lvl_txt = 'ERROR'; break;
+			case LOG_WARN:			 $lvl_txt = 'WARN';	break;
+			case LOG_INFO:			 $lvl_txt = 'INFO';	break;
+			case LOG_DEBUG_LOW:	$lvl_txt = 'DEBUG'; break;
 			case LOG_DEBUG_MED:	 $lvl_txt = 'DEBUG'; break;
 			case LOG_DEBUG_HIGH: $lvl_txt = 'DEBUG'; break;
 		}
@@ -360,11 +360,14 @@ function resize_text(){
 	$('#hymntext').css('font-size', ($defaultFontSize) + 'px')
 
 	// Get the area that we're allowed and the area we're requesting.
-	$area_allowed = $('#hymntext').eq(0).parent()[0].getBoundingClientRect();
-	$area_requested = $('#hymntext')[0].getBoundingClientRect();
+	debugger;
+	let $area_allowed = $('#hymntext').eq(0).parent()[0].getBoundingClientRect();
+	let $area_requested = $('#hymntext')[0].getBoundingClientRect();
 
 	log(LOG_DEBUG_HIGH, 'resize_text() Allowed area: ' + $area_allowed['width'] + ' x ' + $area_allowed['height']);
 	log(LOG_DEBUG_HIGH, 'resize_text() Allowed requested: ' + $area_requested['width'] + ' x ' + $area_requested['height']);
+
+	let $mult_h, $mult_w;
 
 	// Check if the text is too tall
 	if($area_requested['height'] > $area_allowed['height']){
@@ -501,17 +504,17 @@ function isPoppedOut(){
 }
 
 /**
- * updates background color of canvas  and sets a cookie
+ * updates background color of canvas	and sets a cookie
  *
  *
  */
 function updateBgColor(jscolor){
 	log(LOG_DEBUG_MED, 'Function Called: updateBgColor()');
 	log('jscolor');
-	document.getElementById('hymncontainer').style.backgroundColor =  jscolor;
+	document.getElementById('hymncontainer').style.backgroundColor =	jscolor;
 
 	if(isPoppedOut()){
-		$popOutWin.document.getElementById('hymncontainer').style.backgroundColor =  jscolor;;
+		$popOutWin.document.getElementById('hymncontainer').style.backgroundColor =	jscolor;;
 	}
 	setCookie("hymnBGcolor", jscolor, 365);
 }
@@ -523,7 +526,7 @@ function updateBgColor(jscolor){
  */
 function updateTxColor(jscolor){
 	log(LOG_DEBUG_MED, 'Function Called: updateBgColor()');
-	document.getElementById('hymncontainer').style.color =  jscolor;
+	document.getElementById('hymncontainer').style.color =	jscolor;
 
 	if(isPoppedOut()){
 		$popOutWin.document.getElementById('hymncontainer').style.color = jscolor;;
@@ -545,19 +548,19 @@ function updateColors(){
 	document.getElementById('bgcolor').value = $bgcolor;
 	document.getElementById('txcolor').value = $txcolor;
 	document.getElementById('bgcolor').style.backgroundColor = $bgcolor;
-	document.getElementById('txcolor').style.backgroundColor =  $txcolor;
+	document.getElementById('txcolor').style.backgroundColor =	$txcolor;
 
 	if($bgcolor != ""){
-		document.getElementById('hymncontainer').style.backgroundColor =  $bgcolor;
+		document.getElementById('hymncontainer').style.backgroundColor =	$bgcolor;
 		if(isPoppedOut()){
-			$popOutWin.document.getElementById('hymncontainer').style.backgroundColor =  $bgcolor;
+			$popOutWin.document.getElementById('hymncontainer').style.backgroundColor =	$bgcolor;
 		}
 	}
 
 	if($txcolor != ""){
-		document.getElementById('hymncontainer').style.color =  $txcolor;
+		document.getElementById('hymncontainer').style.color =	$txcolor;
 		if(isPoppedOut()){
-			$popOutWin.document.getElementById('hymncontainer').style.color =  $txcolor;
+			$popOutWin.document.getElementById('hymncontainer').style.color =	$txcolor;
 		}
 	}
 
@@ -572,10 +575,10 @@ function updateColors(){
  *
  */
 function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+ d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 
@@ -584,17 +587,17 @@ function setCookie(cname, cvalue, exdays) {
  *
  */
 function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	for(var i = 0; i <ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
 }
